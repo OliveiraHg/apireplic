@@ -38,7 +38,7 @@ let res2 = await post(`https://www.y2mate.com/mates/en68/convert`, {
     ajax: '1',
     token: '',
     ftype: tipe,
-    fquality: 720
+    fquality: quality
   })
 const meme = await res2.json()
 const supp = cheerio.load(meme.result)
@@ -60,6 +60,7 @@ function post(url, formdata) {
         body: new URLSearchParams(Object.entries(formdata))
     })
 }
+
 const ytIdRegex = /(?:http(?:s|):\/\/|)(?:(?:www\.|)youtube(?:\-nocookie|)\.com\/(?:watch\?.*(?:|\&)v=|embed\/|v\/)|youtu\.be\/)([-_0-9A-Za-z]{11})/
 let ytId = ytIdRegex.exec(yutub)
 url = 'https://youtu.be/' + ytId[1]
@@ -68,6 +69,7 @@ let res = await post(`https://www.y2mate.com/mates/en68/analyze/ajax`, {
     q_auto: 0,
     ajax: 1
   })
+
 const mela = await res.json()
 const $ = cheerio.load(mela.result)
 const hasil = []
@@ -87,8 +89,8 @@ let res2 = await post(`https://www.y2mate.com/mates/en68/convert`, {
     ftype: tipe,
     fquality: quality
   })
-
-
+const meme = await res2.json()
+const supp = cheerio.load(meme.result)
 let link = supp('div').find('a').attr('href')
 hasil.push({ thumb, judul, quality, tipe, size, output, link})
 return hasil
@@ -96,5 +98,3 @@ return hasil
 
 
 module.exports = { y2mateV, y2mateA}
-
-y2mateA("https://youtu.be/Gi8KaGhOSzs").then(console.log)
