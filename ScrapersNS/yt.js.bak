@@ -87,9 +87,9 @@ let res2 = await post(`https://www.y2mate.com/mates/en68/convert`, {
     ftype: tipe,
     fquality: quality
   })
-const meme2 = await res2.json()
-const supp2 = cheerio.load(meme.result)
-let link2 = supp('div').find('a').attr('href')
+const meme = await res2.json()
+const supp = cheerio.load(meme.result)
+let link = supp('div').find('a').attr('href')
 hasil.push({ thumb, judul, quality, tipe, size, output, link})
 return hasil
 }
@@ -97,5 +97,4 @@ return hasil
 
 module.exports = { y2mateV, y2mateA}
 
-y2mateV("https://youtu.be/Gi8KaGhOSzs").then(console.log)
 y2mateA("https://youtu.be/Gi8KaGhOSzs").then(console.log)
